@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { ProductContext } from "../contexts/ProductContext";
+import { ProductContext } from "../../contexts/ProductContext";
 
 const ProductFilter: React.FC = () => {
   const [category, setCategory] = useState("");

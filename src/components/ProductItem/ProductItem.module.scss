@@ -1,0 +1,19 @@
+.card-custom {
+  margin: 1rem;
+  width: 18rem;
+
+  img {
+    height: 200px; // Set a fixed height for consistency
+    object-fit: contain; // This ensures the whole image fits inside the card
+    object-position: center; // Center the image
+    border-bottom: 1px solid #ddd; // Optional: Add a bottom border for styling
+  }
+
+  .btn-custom {
+    background-color: #007bff;
+    border: none;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
