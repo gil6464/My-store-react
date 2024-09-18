@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Product } from "../../services/ProductService";
-import { CartContext } from "../../contexts/CartContext";
+import { useCart } from "@hooks/useCart";
 import { Card, Button } from "react-bootstrap";
 import styles from "./ProductItem.module.scss";
 
@@ -9,13 +9,7 @@ interface ProductItemProps {
 }
 
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
-  const cartContext = useContext(CartContext);
-
-  if (!cartContext) {
-    return <p>Loading...</p>;
-  }
-
-  const { addToCart } = cartContext;
+  const { addToCart } = useCart();
 
   return (
     <Card className={styles["card-custom"]}>

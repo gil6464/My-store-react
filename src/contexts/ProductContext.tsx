@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode } from "react";
 import { Product } from "../services/ProductService";
-import useFetch from "../hooks/useFetch";
+import useFetch from "@hooks/useFetch";
 
 interface ProductContextType {
   products: Product[];
