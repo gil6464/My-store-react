@@ -1,35 +1,44 @@
+import { useCart } from "@hooks/useCart";
 import React, { useContext } from "react";
-import { CartContext } from "../../contexts/CartContext";
+import { ButtonGroup, ListGroup, Button } from "react-bootstrap";
 
 const Cart: React.FC = () => {
-  const cartContext = useContext(CartContext);
-
-  if (!cartContext) {
-    return <p>Cart is loading...</p>;
-  }
-
-  const { cartItems, removeFromCart } = cartContext;
-
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const { cartItems, addToCart, deleteFromCart, removeFromCart } = useCart();
 
   return (
-    <div>
-      <h2>Your Cart</h2>
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <>
-          <ul>
-            {cartItems.map(item => (
-              <li key={item.id}>
-                {item.title} (x{item.quantity}) - ${item.price * item.quantity}
-                <button onClick={() => removeFromCart(item.id)}>Remove</button>
-              </li>
-            ))}
-          </ul>
-          <h3>Total: {totalPrice.toFixed(2)}</h3>
-        </>
-      )}
+    <div className="cart-dropdown">
+      <ListGroup>
+        {cartItems.length === 0 ? (
+          <ListGroup.Item>Your cart is empty</ListGroup.Item>
+        ) : (
+          cartItems.map(item => (
+            <ListGroup.Item key={item.id}>
+              <div className="d-flex justify-content-between align-items-center">
+                <span>
+                  {item.title}(x{item.quantity})
+                </span>
+                <ButtonGroup>
+                  <Button variant="secondary" onClick={() => addToCart(item)}>
+                    +
+                  </Button>
+                  <Button variant="secondary" onClick={() => removeFromCart(item.id)}>
+                    -
+                  </Button>
+                  <Button variant="danger" onClick={() => deleteFromCart(item.id)}>
+                    Remove
+                  </Button>
+                </ButtonGroup>
+              </div>
+              <div>Price ${item.price}</div>
+            </ListGroup.Item>
+          ))
+        )}
+        {cartItems.length > 0 && (
+          <Button variant="primary" className="mt-2">
+            Proceed to Checkout
+          </Button>
+        )}
+      </ListGroup>
     </div>
   );
 };
